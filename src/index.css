@@ -48,6 +48,7 @@ body {
 .submit-button {
   position: relative;
   top: 8px;
+  cursor: pointer;
 }
 
 .button-wrapper {

@@ -9,7 +9,9 @@ export default class MainContainer extends Component {
     this.state = {
       searchField: '',
       events: [],
-      clickedEventId: null
+      clickedEventId: null,
+      showError: null,
+      isSearching: false,
     }
   }
 
@@ -21,13 +23,29 @@ export default class MainContainer extends Component {
 
   handleFetch = (event) => {
     event.preventDefault();
-    console.log("whats this", this.state.searchField)
-    const postalCode = this.state.searchField
+    const postalCode = this.state.searchField;
+
+    this.setState({
+      showError: null,
+      isSearching: true,
+    });
+
     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?postalCode=${postalCode}&apikey=DhwhlfhAGStRsrMQAEZXBAIq2LJW0EMr`)
     .then(res => res.json())
-    .then(json => this.setState({
-      events: json._embedded.events
-    }))
+    .then(json => {
+      if(json._embedded){
+        this.setState({
+          events: json._embedded.events,
+          isSearching: false,
+        })
+      } else {
+        this.setState({
+          showError: "No events in this area, try a different zipcode!",
+          events: [],
+          isSearching: false,
+        })
+      }
+    })
   }
 
   handleToggleModal = (idx) => {
@@ -43,11 +61,19 @@ export default class MainContainer extends Component {
         <div className="jumbotron event-jumbotron">
           <h1 className="jumbotron-text display-1">Search Events By Zipcode!</h1>
         </div>
-        <h2 className="event-list">What Cool Events I have Around Me.... damn</h2>
         <div className="container">
+        <h2 className="event-list">What Cool Events I have Around Me.... damn</h2>
+        {
+          this.state.showError ?
+            <div className="alert alert-danger text-center" role="alert">
+              {this.state.showError}
+            </div> :
+            ''
+        }
           <EventForm
             handleInputChange={this.handleInputChange}
             handleFetch={this.handleFetch}
+            isSearching={this.state.isSearching}
           />
           <EventList
             events={this.state.events}
