@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #F4FEF9;
+}
+
+.event-jumbotron {
+  text-align: center;
+  background-color: #547E69;
+  border-radius: 0px;
+}
+
+.jumbotron-text {
+  color: #A8FED3;
+}
+
+.container {
+  color: #7A7E7C;
+}
+
+.event-list {
+  color: #7A7E7C;
+  text-align: center;
+}
+
+.search-form {
+  text-align: center;
+}
+
+.form-control {
+  border: 1px solid #A8FED3;
+
+}
+
+.event-image {
+}
+
+.events-list {
+  list-style: none;
+}
+
+.event-wrapper {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.submit-button {
+  position: relative;
+  top: 8px;
+}
+
+.button-wrapper {
+  text-align: center;
+}
+
+.details-button {
+  cursor: pointer;
+}
