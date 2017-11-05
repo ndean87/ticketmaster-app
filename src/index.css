@@ -58,3 +58,8 @@ body {
 .details-button {
   cursor: pointer;
 }
+
+button.btn.btn-primary.submit-button {
+    background-color: #C2786A;
+    border-color: #C2786A;
+}
